@@ -9,29 +9,24 @@ services:
   db:
     image: postgres:13
     container_name: db
+    restart: always
     volumes:
       - pg_data:/var/lib/postgresql/data
     env_file: .env
 
   backend:
-    build: ./backend/
+    image: liectaski/kittygram_backend
     container_name: backend
+    restart: always
     env_file: .env
     volumes:
       - static:/app/static/
       - media:/app/media/
 
-  frontend:
-    build: ./frontend/
-    container_name: frontend
-    env_file: .env
-    command: cp -r /app/build/. /static/
-    volumes:
-      - static:/static
-
   gateway:
-    build: ./nginx/
+    image: liectaski/kittygram_gateway
     container_name: gateway
+    restart: always
     env_file: .env
     ports:
       - 9000:80
