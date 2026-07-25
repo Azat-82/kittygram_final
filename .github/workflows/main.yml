@@ -103,4 +103,3 @@ jobs:
           context: ./nginx/
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/kittygram_gateway:latest
-
