@@ -19,17 +19,29 @@ services:
     container_name: backend
     restart: always
     env_file: .env
+    depends_on:
+      - db
     volumes:
       - static:/app/static/
       - media:/app/media/
 
+  frontend:
+    image: liectaski/kittygram_frontend
+    container_name: frontend
+    restart: always
+    volumes:
+      - static:/app/static/
+
   gateway:
-    image: liectaski/kittygram_gateway
+    image: ${{ secrets.DOCKER_USERNAME }}/kittygram_gateway
     container_name: gateway
     restart: always
-    env_file: .env
     ports:
       - 9000:80
     volumes:
-      - static:/static
+      - static:/static/
       - media:/app/media/
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+      - frontend
