@@ -1,5 +1,3 @@
-version: '3'
-
 volumes:
   pg_data:
   static:
@@ -15,7 +13,7 @@ services:
     env_file: .env
 
   backend:
-    image: liectaski/kittygram_backend
+    image: liectaski/kittygram_backend:latest
     container_name: backend
     restart: always
     env_file: .env
@@ -26,14 +24,14 @@ services:
       - media:/app/media/
 
   frontend:
-    image: liectaski/kittygram_frontend
+    image: liectaski/kittygram_frontend:latest
     container_name: frontend
     restart: always
     volumes:
       - static:/app/static/
 
   gateway:
-    image: ${{ secrets.DOCKER_USERNAME }}/kittygram_gateway
+    image: liectaski/kittygram_gateway:latest
     container_name: gateway
     restart: always
     ports:
