@@ -1,53 +1,32 @@
-![Kittygram Workflow Status](https://github.com/Azat-82/)
+# Проект Kittygram & Taski (Финальное задание)
 
-### Как запустить проект:
+### Описание проекта
+**Kittygram** — это социальная сеть для любителей котиков, позволяющая регистрироваться, добавлять своих питомцев, указывать их достижения и загружать фотографии. 
+**Taski** — удобный менеджер задач для планирования ежедневных дел.
+Оба приложения упакованы в Docker-контейнеры и развернуты на удаленном сервере Ubuntu под управлением веб-сервера Nginx и базы данных PostgreSQL.
 
-Клонировать репозиторий и перейти в него в командной строке:
-
+### Установка и запуск на локальной машине
+1. Клонируйте репозиторий:
+```bash
+git clone git@github.com:Azat-82/kittygram_final.git
 ```
-git clone https://github.com/yandex-praktikum/kittygram_backend.git
+2. Перейдите в папку бэкенда, создайте и активируйте виртуальное окружение:
+```bash
+cd kittygram_final/backend
+python3 -m venv venv
+source venv/bin/activate
 ```
-
-```
-cd kittygram_backend
-```
-
-Cоздать и активировать виртуальное окружение:
-
-```
-python3 -m venv env
-```
-
-* Если у вас Linux/macOS
-
-    ```
-    source env/bin/activate
-    ```
-
-* Если у вас windows
-
-    ```
-    source env/scripts/activate
-    ```
-
-```
-python3 -m pip install --upgrade pip
-```
-
-Установить зависимости из файла requirements.txt:
-
-```
+3. Установите зависимости и примените миграции:
+```bash
 pip install -r requirements.txt
+python manage.py migrate
+```
+4. Запустите локальный сервер разработки:
+```bash
+python manage.py runserver
 ```
 
-Выполнить миграции:
-
-```
-python3 manage.py migrate
-```
-
-Запустить проект:
-
-```
-python3 manage.py runserver
-```
+### Примеры запросов к API Kittygram
+* `GET /api/cats/` — Получить список всех котиков.
+* `POST /api/cats/` — Добавить нового котика (требуется токен авторизации).
+* `GET /api/cats/{id}/` — Получить подробную информацию о конкретном котике.
