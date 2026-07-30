@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8==6.0.0 flake8-isort==6.0.0
+          pip install flake8==6.0.0 flake8-isort==6.0.0 setuptools
           if [ -f backend/requirements.txt ]; then pip install -r backend/requirements.txt; fi
 
       - name: Run linter
